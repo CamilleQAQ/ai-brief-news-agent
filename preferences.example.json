@@ -1,0 +1,11 @@
+{
+  "preferred_tracks": [
+    "Reasoning & Model Architecture",
+    "Efficient AI & AI Infrastructure",
+    "Multimodal"
+  ],
+  "current_focus": [
+    "reasoning evaluation",
+    "inference optimization"
+  ]
+}

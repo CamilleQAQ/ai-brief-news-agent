@@ -1,0 +1,37 @@
+# Secrets and user-specific configuration
+.env
+.env.*
+!.env.example
+preferences.json
+
+# Local Python environments and caches
+.venv/
+venv/
+.release-venv/
+.release-check/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE and operating-system metadata
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Runtime state, logs, and locally generated reports
+.state/
+*.log
+logs/
+output/
+outputs/
+reports/
+daily_brief*.txt
+daily_brief*.md
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
