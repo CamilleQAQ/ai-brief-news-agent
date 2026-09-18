@@ -1,19 +1,19 @@
-# AI Brie News Agent
+# AI Brief News Agent
 
-AI Brie News Agent 会从 arXiv、GitHub 和主要 AI 实验室 / 技术博客采集候选内容，通过来源专项预筛选与 Final Analyzer，生成面向 AI 学生和早期研究者的高价值 Daily Brief。
+AI Brief News Agent 是一个本地运行的 Python AI 信息筛选 pipeline。它从 arXiv、GitHub 和主要 AI 实验室、研究团队及技术博客收集候选内容，针对不同来源分别筛选，再由 DeepSeek 统一整理成每日 Brief。
 
-它不是简单的新闻聚合器。项目优先考虑学生价值、技术深度、证据质量、可复现性和行动价值，并用轻量兴趣偏好改善相关性、用 recent-output cooldown 减少近期重复内容。
+它更像一份每天自动生成的 AI 阅读清单，而不是把所有新闻简单汇总在一起。项目适合已经有一定 AI / ML 基础，希望持续跟进论文、开源项目和技术动态的学生，也可以作为个人研究与工程信息流的起点。
 
 ## Features
 
-- 采集 arXiv 论文，并为预筛选后的候选补充正文证据
-- 发现多个技术方向的 GitHub 项目
-- 聚合主要 AI 实验室、技术博客与少量高质量媒体
-- 对 arXiv、GitHub、编辑来源分别进行 source-specific prefilter
-- 观测主题分布并限制最终输出的主题坍缩
-- 使用个人偏好做 soft boost，而不是硬过滤
-- 使用本地 cooldown history 避免近期重复推送
-- 通过 DeepSeek Final Analyzer 生成结构化日报
+- 从 arXiv RSS 收集论文候选，并读取筛选后论文的正文信息辅助判断
+- 通过 GitHub Search API 跟踪多个 AI 技术方向的新项目和近期活跃项目
+- 聚合主要 AI 实验室、研究团队、技术博客和精选媒体的公开更新
+- arXiv、GitHub 和博客 / 媒体使用各自独立的筛选规则，不用同一套标准处理所有来源
+- 限制同一主题占据过多候选和最终条目，避免日报连续被单一方向刷屏
+- 支持通过 `preferences.json` 配置长期关注方向和近期兴趣，仅调整候选优先级，不作为硬过滤条件
+- 在本地记录近期已经推送的论文、项目和文章，减少重复内容
+- 使用 DeepSeek 对最终候选进行统一筛选和整理
 - 输出 Today's Top 3、AI News、Papers & Blogs、GitHub / Open Source、Skills & Workflows 和 Trend Summary
 
 ## Requirements
@@ -30,8 +30,8 @@ AI Brie News Agent 会从 arXiv、GitHub 和主要 AI 实验室 / 技术博客�
 ### Windows PowerShell
 
 ```powershell
-git clone https://github.com/CamilleQAQ/ai-brie-news-agent.git
-cd ai-brie-news-agent
+git clone https://github.com/CamilleQAQ/ai-brief-news-agent.git
+cd ai-brief-news-agent
 
 py -3.11 -m venv .venv
 .\.venv\Scripts\Activate.ps1
@@ -58,8 +58,8 @@ python main.py
 ### Linux / macOS
 
 ```bash
-git clone https://github.com/CamilleQAQ/ai-brie-news-agent.git
-cd ai-brie-news-agent
+git clone https://github.com/CamilleQAQ/ai-brief-news-agent.git
+cd ai-brief-news-agent
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
@@ -101,7 +101,7 @@ GITHUB_TOKEN=your_github_token_here
 - `preferred_tracks`：长期关注的宽技术方向。
 - `current_focus`：近期正在学习或开发的具体主题。
 
-两者都只是同等质量候选之间的 soft preference，不会覆盖客观质量判断，也不会阻止兴趣之外的高价值内容进入日报。`preferences.json` 不存在时，程序会使用空偏好并正常运行。
+两者只用于在候选接近时调整优先级，不作为硬过滤条件，也不会排除兴趣范围之外的内容。`preferences.json` 不存在时，程序会使用空偏好并正常运行。
 
 ### Tuning Reference
 
@@ -133,7 +133,7 @@ arXiv / GitHub / Blogs & Media Collectors
                     ↓
          Recent-output Cooldown
                     ↓
-       Source-specific Prefilters
+       Separate Rules per Source
                     ↓
              Candidate Pool
                     ↓
@@ -148,8 +148,8 @@ Cooldown 在预筛选前过滤近期已经输出过的内容，历史保存在�
 
 ```text
 ========================================================================
-AI BRIE NEWS AGENT · DAILY BRIEF
-本期共 3 条高价值内容
+AI BRIEF NEWS AGENT · DAILY BRIEF
+本期收录 3 条
 ========================================================================
 
 TODAY'S TOP 3
@@ -157,7 +157,7 @@ TODAY'S TOP 3
 ------------------------------------------------------------------------
 1. 面向推理系统的可复现实验框架
 栏目：Papers & Blogs
-价值：学习如何把推理质量、延迟与计算预算放进同一评测设计。
+推荐理由：可以看到如何把推理质量、延迟与计算预算放进同一评测设计。
 建议：阅读实验设计并尝试复现一个最小对照实验。
 
 AI NEWS
@@ -189,7 +189,7 @@ TREND SUMMARY
 ## Project Structure
 
 ```text
-ai-brie-news-agent/
+ai-brief-news-agent/
 ├── agent/
 │   ├── analyzer.py          # Final Analyzer、结构化结果与最终约束
 │   ├── prefilter.py         # 三类来源的专项预筛选

@@ -32,7 +32,7 @@ session = requests.Session()
 
 session.headers.update({
     "Accept": "application/vnd.github+json",
-    "User-Agent": "ai-brie-news-agent/0.1",
+    "User-Agent": "ai-brief-news-agent/0.1",
 })
 
 

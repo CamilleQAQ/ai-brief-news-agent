@@ -9,7 +9,7 @@ First public CLI release.
 ### Added
 
 - arXiv, GitHub, official AI blog, technical blog, and media collectors
-- Source-specific prefilters and arXiv HTML evidence enrichment
+- Separate filtering rules for arXiv, GitHub, and editorial sources, plus arXiv HTML reading
 - Student-value-oriented Final Analyzer with topic diversity constraints
 - Today's Top 3 and five-section terminal Daily Brief
 - Soft preference configuration through `preferences.json`

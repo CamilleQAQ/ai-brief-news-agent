@@ -48,7 +48,7 @@ SITEMAP_SOURCES = [
 ]
 
 META_BLOG_URL = "https://ai.meta.com/blog/"
-DEFAULT_HEADERS = {"User-Agent": "ai-brie-news-agent/0.1"}
+DEFAULT_HEADERS = {"User-Agent": "ai-brief-news-agent/0.1"}
 
 session = requests.Session()
 session.headers.update(DEFAULT_HEADERS)

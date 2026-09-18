@@ -31,7 +31,7 @@ class ReporterTests(unittest.TestCase):
         self.assertIn("不代表今天刚发布", report)
 
     def test_top_item_text_is_shortened(self):
-        long_text = "这是一个很长的价值说明" * 20
+        long_text = "这是一个很长的推荐理由" * 20
 
         shortened = shorten_text(long_text)
 

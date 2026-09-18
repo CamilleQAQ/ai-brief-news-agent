@@ -32,7 +32,7 @@ def main():
         sys.stdout.reconfigure(encoding="utf-8")
 
     print("=" * 72)
-    print("AI BRIE NEWS AGENT")
+    print("AI BRIEF NEWS AGENT")
     print("=" * 72)
 
     print("\n[1/5] 正在采集候选内容...")

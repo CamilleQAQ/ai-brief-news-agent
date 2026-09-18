@@ -18,7 +18,7 @@ from settings import (
 session = requests.Session()
 
 session.headers.update({
-    "User-Agent": "ai-brie-news-agent/0.1"
+    "User-Agent": "ai-brief-news-agent/0.1"
 })
 
 ARXIV_HTML_URL = "https://arxiv.org/html/{arxiv_id}"

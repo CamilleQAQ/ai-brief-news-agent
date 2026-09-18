@@ -18,8 +18,8 @@ def render_report(result):
     total = sum(len(result.get(key, [])) for _, key, _ in sections)
     lines = [
         "=" * REPORT_WIDTH,
-        "AI BRIE NEWS AGENT · DAILY BRIEF",
-        f"本期共 {total} 条高价值内容",
+        "AI BRIEF NEWS AGENT · DAILY BRIEF",
+        f"本期收录 {total} 条",
         "=" * REPORT_WIDTH,
     ]
     lines.extend(render_top_items(result.get("top_items", [])))
@@ -52,7 +52,7 @@ def render_top_items(items):
             f"栏目：{section}",
         ])
         lines.extend(compact_lines([
-            ("价值", shorten_text(item.get("why"))),
+            ("推荐理由", shorten_text(item.get("why"))),
             ("建议", shorten_text(item.get("action"))),
             ("链接", item.get("url")),
         ]))
@@ -91,7 +91,7 @@ def render_section(title, items, renderer):
 def render_news_item(item):
     return compact_lines([
         ("摘要", item.get("summary")),
-        ("价值", item.get("why_it_matters")),
+        ("推荐理由", item.get("why_it_matters")),
         ("注意", item.get("caution")),
         ("来源", item.get("source")),
         ("链接", item.get("url")),
@@ -117,7 +117,7 @@ def render_open_source_item(item):
     return compact_lines([
         ("方向", item.get("direction")),
         ("摘要", item.get("summary")),
-        ("价值", item.get("why_it_matters")),
+        ("推荐理由", item.get("why_it_matters")),
         ("建议行动", item.get("what_to_do")),
         ("注意", item.get("caution")),
         ("Stars", star_text),
